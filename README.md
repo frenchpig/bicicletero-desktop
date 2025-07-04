@@ -12,16 +12,39 @@ Esta aplicación de escritorio permite acceder al sistema web de gestión de bic
 - ✅ Navegación segura dentro del dominio configurado
 - ✅ Apertura automática de enlaces externos en el navegador
 - ✅ Iconos personalizados para cada plataforma
-- ✅ Configuración centralizada de URL base
+- ✅ Configuración centralizada de URL base mediante variables de entorno
 
 ## Configuración
 
-### URL Base
+### Variables de Entorno
 
-Para cambiar el dominio de la aplicación, modifica la variable `BASE_URL` en el archivo `main.js`:
+La aplicación utiliza variables de entorno para su configuración. Para configurar la URL base:
+
+1. **Copia el archivo de ejemplo:**
+```bash
+cp .env-example .env
+```
+
+2. **Edita el archivo `.env`:**
+```bash
+# URL de desarrollo
+BASE_URL=https://bicicletero.test
+
+# URL de producción
+# BASE_URL=https://bicicleta.plataformasb.cl
+```
+
+3. **Personaliza la URL según tu entorno:**
+   - **Desarrollo:** `https://bicicletero.test`
+   - **Staging:** `https://staging.bicicletero.com`
+   - **Producción:** `https://bicicleta.plataformasb.cl`
+
+### Configuración Manual (Alternativa)
+
+Si prefieres configurar directamente en el código, modifica la variable `BASE_URL` en el archivo `main.js`:
 
 ```javascript
-const BASE_URL = 'https://tu-dominio.com';
+const BASE_URL = process.env.BASE_URL || 'https://tu-dominio.com';
 ```
 
 ## Instalación y Uso
@@ -44,7 +67,13 @@ cd bicicletero-desktop
 npm install
 ```
 
-3. **Ejecuta la aplicación en modo desarrollo:**
+3. **Configura las variables de entorno:**
+```bash
+cp .env-example .env
+# Edita el archivo .env con tu URL
+```
+
+4. **Ejecuta la aplicación en modo desarrollo:**
 ```bash
 npm start
 ```
@@ -107,6 +136,8 @@ bicicletero-desktop/
 ├── main.js          # Proceso principal de Electron
 ├── preload.js       # Script de precarga
 ├── package.json     # Configuración del proyecto
+├── .env-example     # Ejemplo de configuración de variables de entorno
+├── .env             # Variables de entorno (no incluido en git)
 └── README.md        # Documentación
 ```
 
@@ -128,6 +159,12 @@ Si hay problemas con las dependencias, elimina `node_modules` y ejecuta `npm ins
 
 ### Error al crear ejecutable
 Si hay problemas con `npm run exe`, usa `npm run build` como alternativa.
+
+### Error de configuración de URL
+Si la aplicación no carga la URL correcta:
+1. Verifica que el archivo `.env` existe
+2. Confirma que `BASE_URL` está configurada correctamente
+3. Asegúrate de que la URL incluye el protocolo (https://)
 
 ## Licencia
 

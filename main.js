@@ -1,7 +1,9 @@
 const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
+require('dotenv').config();
 
-const BASE_URL = 'https://bicicletero.test';
+// Configuración de la URL base desde variables de entorno
+const BASE_URL = process.env.BASE_URL || 'https://bicicletero.test';
 
 function createWindow() {
   // Selecciona el icono según la plataforma
