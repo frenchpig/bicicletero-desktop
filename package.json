@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-builder",
+    "build": "electron-builder --win",
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux",
-    "dist": "electron-builder --publish=never"
+    "dist": "electron-builder --win --publish=never"
   },
   "keywords": ["electron", "desktop", "bicicletero"],
   "author": "frenchpig",
@@ -37,30 +37,18 @@
         {
           "target": "nsis",
           "arch": ["x64"]
-        }
-      ]
-    },
-    "mac": {
-      "icon": "assets/icon.icns",
-      "target": [
+        },
         {
-          "target": "dmg",
-          "arch": ["x64", "arm64"]
-        }
-      ]
-    },
-    "linux": {
-      "icon": "assets/icon.png",
-      "target": [
-        {
-          "target": "AppImage",
+          "target": "portable",
           "arch": ["x64"]
         }
       ]
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     }
   }
 }
