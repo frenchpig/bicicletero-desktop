@@ -6,33 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-builder --win --dir",
-    "build:win": "electron-builder --win --dir",
-    "dist": "electron-builder --win"
+    "build": "electron-packager . BicicleteroDesktop --platform=win32 --arch=x64 --out=dist --overwrite --icon=assets/icon.ico --prune=true",
+    "exe":"electron-builder build --win portable"
   },
-  "keywords": ["electron", "desktop", "bicicletero"],
+  "keywords": [
+    "electron",
+    "desktop",
+    "bicicletero"
+  ],
   "author": "frenchpig",
   "license": "ISC",
   "devDependencies": {
+    "@electron/packager": "^18.3.6",
     "electron": "^28.0.0",
+    "electron-packager": "^17.1.2",
     "electron-builder": "^24.9.1"
-  },
-  "build": {
-    "appId": "cl.plataformasb.bici",
-    "productName": "Bicicletero Desktop",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "main.js",
-      "preload.js",
-      "assets/**/*",
-      "node_modules/**/*"
-    ],
-    "win": {
-      "icon": "assets/icon.ico",
-      "target": "portable",
-      "sign": false
-    }
   }
 }

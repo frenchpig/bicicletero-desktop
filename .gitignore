@@ -73,6 +73,7 @@ jspm_packages/
 
 # Electron build output
 dist/
+dist-exe/
 build/
 out/
 
