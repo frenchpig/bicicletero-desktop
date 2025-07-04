@@ -55,7 +55,7 @@ npm start
 ```bash
 npm run exe
 ```
-Esto creará un archivo ejecutable portable único en la carpeta `dist-exe/`.
+Esto creará un archivo ejecutable portable único en la carpeta `dist/`.
 
 #### Opción 2: Build en Carpeta
 ```bash
@@ -73,8 +73,8 @@ Esto creará una carpeta `dist/BicicleteroDesktop-win32-x64/` con la aplicación
 
 ### Ejecutable Único (Recomendado)
 ```
-dist-exe/
-└── BicicleteroDesktop.exe    # Ejecutable portable único
+dist/
+└── Bicicletero Desktop.exe    # Ejecutable portable único
 ```
 
 ### Build en Carpeta
@@ -91,7 +91,7 @@ dist/
 
 ### Opción 1: Ejecutable Único (Más Fácil)
 1. Ejecuta `npm run exe`
-2. Copia el archivo `dist-exe/BicicleteroDesktop.exe`
+2. Copia el archivo `dist/Bicicletero Desktop.exe`
 3. El archivo es completamente portable y autónomo
 
 ### Opción 2: Carpeta Completa
@@ -131,4 +131,4 @@ Si hay problemas con `npm run exe`, usa `npm run build` como alternativa.
 
 ## Licencia
 
-N/A
+[Especificar licencia aquí]
