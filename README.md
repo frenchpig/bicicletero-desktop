@@ -12,40 +12,29 @@ Esta aplicación de escritorio permite acceder al sistema web de gestión de bic
 - ✅ Navegación segura dentro del dominio configurado
 - ✅ Apertura automática de enlaces externos en el navegador
 - ✅ Iconos personalizados para cada plataforma
-- ✅ Configuración centralizada de URL base mediante variables de entorno
+- ✅ Configuración centralizada de URL base mediante archivo JSON
 
 ## Configuración
 
-### Variables de Entorno
-
-La aplicación utiliza variables de entorno para su configuración. Para configurar la URL base:
+La aplicación utiliza un archivo `config.json` para configurar la URL base:
 
 1. **Copia el archivo de ejemplo:**
 ```bash
-cp .env-example .env
+cp config-example.json config.json
 ```
 
-2. **Edita el archivo `.env`:**
-```bash
-# URL de desarrollo
-BASE_URL=https://bicicletero.test
-
-# URL de producción
-# BASE_URL=https://bicicleta.plataformasb.cl
+2. **Edita el archivo `config.json`:**
+```json
+{
+  "BASE_URL": "https://bicicletero.test"
+}
 ```
 
-3. **Personaliza la URL según tu entorno:**
-   - **Desarrollo:** `https://bicicletero.test`
-   - **Staging:** `https://staging.bicicletero.com`
-   - **Producción:** `https://bicicleta.plataformasb.cl`
+### Entornos de Configuración
 
-### Configuración Manual (Alternativa)
-
-Si prefieres configurar directamente en el código, modifica la variable `BASE_URL` en el archivo `main.js`:
-
-```javascript
-const BASE_URL = process.env.BASE_URL || 'https://tu-dominio.com';
-```
+- **Desarrollo:** `https://bicicletero.test`
+- **Staging:** `https://staging.bicicletero.com`
+- **Producción:** `https://bicicleta.plataformasb.cl`
 
 ## Instalación y Uso
 
@@ -67,10 +56,10 @@ cd bicicletero-desktop
 npm install
 ```
 
-3. **Configura las variables de entorno:**
+3. **Configura la aplicación:**
 ```bash
-cp .env-example .env
-# Edita el archivo .env con tu URL
+cp config-example.json config.json
+# Edita el archivo config.json con tu URL
 ```
 
 4. **Ejecuta la aplicación en modo desarrollo:**
@@ -113,6 +102,7 @@ dist/
     ├── BicicleteroDesktop.exe    # Ejecutable principal
     ├── assets/                   # Iconos y recursos
     ├── node_modules/             # Dependencias
+    ├── config.json               # Configuración de la aplicación
     └── ...                       # Otros archivos necesarios
 ```
 
@@ -128,17 +118,24 @@ dist/
 2. Copia la carpeta `dist/BicicleteroDesktop-win32-x64/` completa
 3. La aplicación es portable y no requiere instalación
 
+### Configuración Post-Compilación
+
+Si necesitas cambiar la URL después de compilar:
+
+1. **Para ejecutable único:** No es posible cambiar la URL
+2. **Para carpeta completa:** Edita el archivo `config.json` dentro de la carpeta
+
 ## Estructura del Proyecto
 
 ```
 bicicletero-desktop/
-├── assets/          # Iconos de la aplicación
-├── main.js          # Proceso principal de Electron
-├── preload.js       # Script de precarga
-├── package.json     # Configuración del proyecto
-├── .env-example     # Ejemplo de configuración de variables de entorno
-├── .env             # Variables de entorno (no incluido en git)
-└── README.md        # Documentación
+├── assets/              # Iconos de la aplicación
+├── main.js              # Proceso principal de Electron
+├── preload.js           # Script de precarga
+├── package.json         # Configuración del proyecto
+├── config-example.json  # Ejemplo de configuración
+├── config.json          # Configuración de la aplicación (no incluido en git)
+└── README.md            # Documentación
 ```
 
 ## Plataformas Soportadas
@@ -162,9 +159,10 @@ Si hay problemas con `npm run exe`, usa `npm run build` como alternativa.
 
 ### Error de configuración de URL
 Si la aplicación no carga la URL correcta:
-1. Verifica que el archivo `.env` existe
+1. Verifica que el archivo `config.json` existe
 2. Confirma que `BASE_URL` está configurada correctamente
 3. Asegúrate de que la URL incluye el protocolo (https://)
+4. Reinicia la aplicación después de cambiar la configuración
 
 ## Licencia
 

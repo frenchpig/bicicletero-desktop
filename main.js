@@ -1,9 +1,24 @@
 const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
-require('dotenv').config();
+const fs = require('fs');
 
-// Configuración de la URL base desde variables de entorno
-const BASE_URL = process.env.BASE_URL || 'https://bicicletero.test';
+// Función para obtener la URL base desde config.json
+function getBaseUrl() {
+  const configPath = path.join(__dirname, 'config.json');
+  try {
+    if (fs.existsSync(configPath)) {
+      const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+      return config.BASE_URL || 'https://bicicletero.test';
+    }
+  } catch (error) {
+    console.log('Error leyendo config.json:', error.message);
+  }
+  
+  // Valor por defecto si no existe config.json
+  return 'https://bicicletero.test';
+}
+
+const BASE_URL = getBaseUrl();
 
 function createWindow() {
   // Selecciona el icono según la plataforma
