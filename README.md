@@ -70,4 +70,4 @@ La aplicación está construida con Electron y permite la navegación segura den
 
 ## Licencia
 
-[Especificar licencia aquí] 
+N/A
